@@ -20,7 +20,7 @@ drawings:
   persist: false
 ---
 
-# Hacking the rubick
+# Hacking the Rubick
 
 How to make GraphQL resolvers in SubSquid indexer
 
@@ -40,7 +40,7 @@ How to make queries in GraphQL
 
 - **Analytics** - making data views is a great way to get insights into the data.
 
-- **You can't process RMRK** - RMRK is basically string in the blockchain, so without indexers you can't process it.
+- **You can't process RMRK** - RMRK is basically a string in the blockchain, so without indexers, you can't process it.
 
 - **Simple GraphQL interface** - a great way to get data from the blockchain.
 
@@ -51,13 +51,13 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 ---
 
-# Recap: What is indexer?
+# Recap: What is an indexer?
 
 Tool to process Substrate blocks one by one.
 
 - **Two types of data in each block** - Events and extrinsics
   - **Extrinsics** - The call that each user makes to the chain (`system.remark`).
-  - **Events** - Interactions that are emmited by the chain (`balances.Transfer`).
+  - **Events** - Interactions that are emitted by the chain (`balances.Transfer`).
 - **Rule of thumb** - It is more effective to process *events*.
 
 <!-- <div grid="~ cols-2 gap-2" m="t-2">
@@ -76,7 +76,7 @@ Tool to process Substrate blocks one by one.
 
 ---
 
-# Recap: How does the processing works?
+# Recap: How does the processing work?
 
 
   1. For each block, extracts all requested extrinsics/events.
@@ -166,15 +166,15 @@ type Event implements EventType @entity {
 
 ### Example Task
 
-Using **rubick** fetch first `10` NFTs that has been recently listed
-- For event I want: `meta`, `timestamp`
+Using **Rubick** fetch the first `10` NFTs that have been recently listed
+- For the event, I want: `meta`, `timestamp`
 - For NFT get: `id`, `name`
 ---
 
 # Example Task (how I would write it)
 
-Using **rubick** fetch first `10` NFTs that has been recently listed
-- For event I want: `meta`, `timestamp`
+Using **Rubick** fetch the first `10` NFTs that have been recently listed
+- For the event, I want: `meta`, `timestamp`
 - For NFT get: `id`, `name`
 
 ```graphql
@@ -197,24 +197,27 @@ query lastNftListByEvent($limit: Int!, $event: Interaction!) {
 
 ---
 
-# OK, so why do we need resolvers? 
+# OK, so what are resolvers?
+and do we need them? 
 
-- **Do not kill user's device** - Parsing and processing data on the client side is making the user's device slow.
-- **Some quries are impossible to write** - Effectively, we can't write aggregation queries from GraphQL
+- **Functions** - that expose certain data to the GraphQL schema.
+- **Do not kill the user's device** - Parsing and processing data on the client-side is making the user's device slow.
+- **Some queries are impossible to write** - Effectively, we can't write aggregation queries from GraphQL
 - **Flexibility** - We can write queries that will return only the data we need.
+- **No need for reindexing** - It's just a "server" extension.
 
 ---
 
 
-# What's the current structure of rubick?
+# What's the current structure of Rubick?
 
 - **mappings** - indexer's logic
 - **model** - generated types  by subsquid
 - **types** - our own types
 - **server-extension** - folder for resolvers
-  - *model*
-  - *query*
-  - *resolvers*
+  - *model* - how the data will look like in graphql
+  - *query* - the logic to fetch the data from the DB
+  - *resolvers* - function(s) that will be called when the query is executed
 
 ---
 
@@ -287,7 +290,7 @@ touch resolvers/nftEvents.ts
 
 touch query/event.ts
 
-First we need to add the query:
+First, we need to add the query:
 
 ```ts
 export const nftEventList = `SELECT e.meta, e.timestamp as date, ne.id, ne.name, me.image, ne.issuer, e.caller
@@ -305,7 +308,7 @@ LIMIT $2`
 
 touch model/event.model.ts
 
-Second we have to create the model:
+Second, we have to create the model:
 
 ```ts
 @ObjectType()
@@ -368,7 +371,7 @@ export {
 ---
 
 # Let's test it
-Let's play with the playground
+Let's play on the playground
 
 ```bash
 just build
