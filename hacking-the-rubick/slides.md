@@ -230,14 +230,44 @@ resolver to check how many NFTs are listed
 
 # Let's code <3
 
-### Task 1 (How would I write it)
+### Task 1 (How I would write it)
 
-resolver to check how many NFTs are listed
-- parameters - `collectionId`
-- should return `totalCount`
+```sql
+SELECT COUNT(*)
+FROM nft_entity
+WHERE collection_id = $1
+AND price > 0;
+```
+
 
 ---
 
+# Let's code <3
+
+### Task 2 (issue #29)
+
+resolver for the last events
+- parameters - `interaction`
+- should return `events[]` where
+- query should return `meta`, `timestamp`, `nft id`, `nft name`, `metadata image`, `event caller`, `nft issuer`
+
+---
+
+# Let's code <3
+
+### Task 2 (How I would write it)
+
+```sql
+SELECT e.meta, e.timestamp, ne.id, ne.name, me.image, ne.issuer, e.caller
+FROM event e
+LEFT JOIN nft_entity ne ON ne.id = e.nft_id
+LEFT JOIN metadata_entity me ON me.id = ne.meta_id
+WHERE e.interaction = $1
+LIMIT $2
+```
+
+
+---
 layout: center
 class: text-center
 ---
