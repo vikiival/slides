@@ -258,12 +258,133 @@ resolver for the last events
 ### Task 2 (How I would write it)
 
 ```sql
-SELECT e.meta, e.timestamp, ne.id, ne.name, me.image, ne.issuer, e.caller
+SELECT e.meta, e.timestamp as date, ne.id, ne.name, me.image, ne.issuer, e.caller
+FROM event e
+LEFT JOIN nft_entity ne ON ne.id = e.nft_id
+LEFT JOIN metadata_entity me ON me.id = ne.meta_id
+WHERE e.interaction = 'LIST'
+ORDER BY e.timestamp DESC
+LIMIT 10
+```
+
+---
+
+# A time for resolver (1)
+
+We will make a resolver for the query from task 2.
+
+We need to edit 3 files:
+
+```bash
+cd rubick/server-extension/
+touch query/event.ts
+touch model/event.model.ts
+touch resolvers/nftEvents.ts
+```
+---
+
+# A time for resolver (2)
+
+touch query/event.ts
+
+First we need to add the query:
+
+```ts
+export const nftEventList = `SELECT e.meta, e.timestamp as date, ne.id, ne.name, me.image, ne.issuer, e.caller
 FROM event e
 LEFT JOIN nft_entity ne ON ne.id = e.nft_id
 LEFT JOIN metadata_entity me ON me.id = ne.meta_id
 WHERE e.interaction = $1
-LIMIT $2
+ORDER BY e.timestamp DESC
+LIMIT $2`
+```
+
+---
+
+# A time for resolver (2)
+
+touch model/event.model.ts
+
+Second we have to create the model:
+
+```ts
+@ObjectType()
+export class TokenEventEntity {
+  @Field(() => String, { nullable: false })
+  id!: string
+  @Field(() => String, { nullable: true })
+  name!: string
+  @Field(() => Date, { nullable: false })
+  date!: Date
+  @Field(() => String, { nullable: true, defaultValue: '' })
+  meta!: string
+  @Field(() => String, { nullable: true, defaultValue: '' })
+  image!: string
+  @Field(() => String, { nullable: false })
+  issuer!: string
+  @Field(() => String,{ nullable: false })
+  caller!: string
+}
+```
+
+---
+
+# A time for resolver (3)
+
+touch resolvers/nftEvents.ts
+
+Third, we finish the resolver:
+
+```ts
+@Resolver()
+export class NFTEventResolver {
+  constructor(private tx: () => Promise<EntityManager>) {}
+
+  @Query(() => [TokenEventEntity])
+  async nftEventListByType(
+    @Arg('type', { nullable: false }) type: Interaction,
+    @Arg('limit', { nullable: true, defaultValue: null }) limit: number,
+  ): Promise<TokenEventEntity[]> {
+    const result: TokenEventEntity[] = await makeQuery(this.tx, EventEntity, nftEventList, [type, limit])
+    return result
+  }
+}
+```
+
+---
+
+# A time for resolver (4)
+
+touch resolvers/index.ts
+
+Last we need to register our resolver:
+
+```ts
+export {
+  NFTEventResolver
+}
+```
+
+---
+
+# Let's test it
+Let's play with the playground
+
+```bash
+just build
+just serve
+```
+
+and pass the following query:
+
+```graphql
+query MyQuery {
+  nftEventListByType(type: "LIST", limit: 10) {
+    id
+    meta
+    name
+  }
+}
 ```
 
 
