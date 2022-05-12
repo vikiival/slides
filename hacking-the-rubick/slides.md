@@ -216,7 +216,7 @@ and do we need them?
 - **types** - our own types
 - **server-extension** - folder for resolvers
   - *model* - how the data will look like in graphql
-  - *query* - the logic to fetch the data from the DB
+  - *query* - the logic to fetch the data from the DB (in SQL)
   - *resolvers* - function(s) that will be called when the query is executed
 
 ---
@@ -225,7 +225,7 @@ and do we need them?
 
 ### Task 1 (issue #69)
 
-resolver to check how many NFTs are listed
+write a query in SQL that returns number of NFTs that are
 - parameters - `collectionId`
 - should return `totalCount`
 
@@ -249,10 +249,9 @@ AND price > 0;
 
 ### Task 2 (issue #29)
 
-resolver for the last events
-- parameters - `interaction`
-- should return `events[]` where
-- query should return `meta`, `timestamp`, `nft id`, `nft name`, `metadata image`, `event caller`, `nft issuer`
+write a query in SQL that returns basic information about NFTs and events
+- parameters - `interaction` type ('LIST', 'BUY', 'SEND')
+- query should return `meta`, `timestamp`, `nft id`, `nft name`, `metadata image`, `event caller`, `nft issuer` per each event/NFT
 
 ---
 
