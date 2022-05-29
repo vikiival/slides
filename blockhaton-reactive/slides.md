@@ -59,6 +59,8 @@ The techstack we use.
 
 - **Microserivces** - Cloudflare workers for a critical part of the system (pinning, caching, etc).
 
+- **Libraries** - Lot of NPM modules (under @kodadot1)
+
 
 
 <!-- <div grid="~ cols-2 gap-2" m="t-2">
@@ -270,7 +272,9 @@ const ifThat: IfThat<SomeNFT> = [eq(asVar('currentOwner'), asVar('issuer')), 'me
 
 # Where to test it
 
-KodaDot has a sandbox
+KodaDot has a sandbox for testing
+
+
 
 
 ---
