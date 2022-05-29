@@ -232,197 +232,45 @@ expect(res.metadata).eq(newMeta)
 
 ---
 
-# OK, so what are resolvers?
-and do we need them? 
-
-- **Functions** - that expose certain data to the GraphQL schema.
-- **Do not kill the user's device** - Parsing and processing data on the client-side is making the user's device slow.
-- **Some queries are impossible to write** - Effectively, we can't write aggregation queries from GraphQL
-- **Flexibility** - We can write queries that will return only the data we need.
-- **No need for reindexing** - It's just a "server" extension.
-
----
-
-
-# What's the current structure of Rubick?
-
-- **mappings** - indexer's logic
-- **model** - generated types  by subsquid
-- **types** - our own types
-- **server-extension** - folder for resolvers
-  - *model* - how the data will look like in graphql
-  - *query* - the logic to fetch the data from the DB (in SQL)
-  - *resolvers* - function(s) that will be called when the query is executed
-
----
-
-# Let's code <3
-
-### Task 1 (issue #69)
-
-write a query in SQL that returns number of NFTs that are
-- parameters - `collectionId`
-- should return `totalCount`
-
----
-
-# Let's code <3
-
-### Task 1 (How I would write it)
-
-```sql
-SELECT COUNT(*)
-FROM nft_entity
-WHERE collection_id = $1
-AND price > 0;
-```
-
-
----
-
-# Let's code <3
-
-### Task 2 (issue #29)
-
-write a query in SQL that returns basic information about NFTs and events
-- parameters - `interaction` type ('LIST', 'BUY', 'SEND')
-- query should return `meta`, `timestamp`, `nft id`, `nft name`, `metadata image`, `event caller`, `nft issuer` per each event/NFT
-
----
-
-# Let's code <3
-
-### Task 2 (How I would write it)
-
-```sql
-SELECT e.meta, e.timestamp as date, ne.id, ne.name, me.image, ne.issuer, e.caller
-FROM event e
-LEFT JOIN nft_entity ne ON ne.id = e.nft_id
-LEFT JOIN metadata_entity me ON me.id = ne.meta_id
-WHERE e.interaction = 'LIST'
-ORDER BY e.timestamp DESC
-LIMIT 10
-```
-
----
-
-# A time for resolver (1)
-
-We will make a resolver for the query from task 2.
-
-We need to edit 3 files:
-
-```bash
-cd rubick/server-extension/
-touch query/event.ts
-touch model/event.model.ts
-touch resolvers/nftEvents.ts
-```
----
-
-# A time for resolver (2)
-
-touch query/event.ts
-
-First, we need to add the query:
+# OK, so how to integrate into my NFT?
+Let's make a rule
 
 ```ts
-export const nftEventList = `SELECT e.meta, e.timestamp as date, ne.id, ne.name, me.image, ne.issuer, e.caller
-FROM event e
-LEFT JOIN nft_entity ne ON ne.id = e.nft_id
-LEFT JOIN metadata_entity me ON me.id = ne.meta_id
-WHERE e.interaction = $1
-ORDER BY e.timestamp DESC
-LIMIT $2`
+import { IfThat, eq, asVar, Variable } from '@kodadot1/if-that'
+import { SomeNFT } from './data'
+const ifThat: IfThat<SomeNFT> = [eq(asVar('currentOwner'), asVar('issuer')), 'metadata', newMeta]
 ```
+
+- add this logic to the JSON metadata
+- upload to IPFS
+- when you read the metadata, check if it contains the logic field
+- if it does, then you can use the logic to update the state of the NFT
 
 ---
 
-# A time for resolver (2)
 
-touch model/event.model.ts
+# The JSON result
 
-Second, we have to create the model:
-
-```ts
-@ObjectType()
-export class TokenEventEntity {
-  @Field(() => String, { nullable: false })
-  id!: string
-  @Field(() => String, { nullable: true })
-  name!: string
-  @Field(() => Date, { nullable: false })
-  date!: Date
-  @Field(() => String, { nullable: true, defaultValue: '' })
-  meta!: string
-  @Field(() => String, { nullable: true, defaultValue: '' })
-  image!: string
-  @Field(() => String, { nullable: false })
-  issuer!: string
-  @Field(() => String,{ nullable: false })
-  caller!: string
+```json
+{
+  "name": "Sunspot",
+  "description": "Astrophysicists estimate the likelihood of a solar storm is 1",
+  "image": "ipfs://ipfs/bafkreigutyg3pg2bjjfah5fccp2x65lefte763ps4dwfwaig3ej7kwogh4",
+  "external_url": "https://kodadot.xyz",
+  "type": "image/png",
+  "logic": [
+    { "===": [{ "var": "currentOwner" }, { "var": "issuer" }] },
+    "metadata",
+    "ipfs://ipfs/bafkreie6aheicniw2ene6iofxj7e6cettjioxojdstwabdqkxozjk2tyru"
+  ]
 }
 ```
 
 ---
 
-# A time for resolver (3)
+# Where to test it
 
-touch resolvers/nftEvents.ts
-
-Third, we finish the resolver:
-
-```ts
-@Resolver()
-export class NFTEventResolver {
-  constructor(private tx: () => Promise<EntityManager>) {}
-
-  @Query(() => [TokenEventEntity])
-  async nftEventListByType(
-    @Arg('type', { nullable: false }) type: Interaction,
-    @Arg('limit', { nullable: true, defaultValue: null }) limit: number,
-  ): Promise<TokenEventEntity[]> {
-    const result: TokenEventEntity[] = await makeQuery(this.tx, EventEntity, nftEventList, [type, limit])
-    return result
-  }
-}
-```
-
----
-
-# A time for resolver (4)
-
-touch resolvers/index.ts
-
-Last we need to register our resolver:
-
-```ts
-export {
-  NFTEventResolver
-}
-```
-
----
-
-# Let's test it
-Let's play on the playground
-
-```bash
-just build
-just serve
-```
-
-and pass the following query:
-
-```graphql
-query MyQuery {
-  nftEventListByType(type: "LIST", limit: 10) {
-    id
-    meta
-    name
-  }
-}
-```
+KodaDot has a sandbox
 
 
 ---
