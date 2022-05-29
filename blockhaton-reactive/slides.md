@@ -134,7 +134,33 @@ Also works for nested objects
 ```
 ---
 
-# Let's do something data
+# Conditional rendering (4)
+
+The object we will use for today
+
+```ts
+export type SomeNFT = {
+  blockNumber: string
+  burned: boolean
+  currentOwner: string
+  id: string
+  issuer: string
+  metadata: string
+  name: string
+  price: string
+  recipient: string
+  royalty: number
+  sn: string
+  meta: {
+    description: string
+    name: string
+    image: string
+  }
+}
+```
+---
+
+# Let's do something
 
 First we need to install the library
 
@@ -143,35 +169,65 @@ yarn add @kodadot1/if-that
 ```
 
 
-### Example Task
+### Example Task (1)
 
-Using **Rubick** fetch the first `10` NFTs that have been recently listed
-- For the event, I want: `meta`, `timestamp`
-- For NFT get: `id`, `name`
+Using **if-that** I want to set new name of NFT if currentOwner is equal to Viki's address.
+
+- Name should be changed to: `Hello Viki @ Blockhaton`
 ---
 
 # Example Task (how I would write it)
 
-Using **Rubick** fetch the first `10` NFTs that have been recently listed
-- For the event, I want: `meta`, `timestamp`
-- For NFT get: `id`, `name`
+Using **if-that** I want to set new name of NFT if currentOwner is equal to Viki's address.
+- Name should be changed to: `Hello Viki @ Blockhaton`
 
-```graphql
-query lastNftListByEvent($limit: Int!, $event: Interaction!) {
-  events(
-    limit: $limit
-    where: { interaction_eq: $event, nft: {burned_eq: false} }
-    orderBy: timestamp_DESC
-  ) {
-    meta
-    timestamp
-    nft {
-      id
-      name
-    }
-  }
-}
+first we need to import the library and some sample data
 
+```ts
+import { IfThat, eq, build, gt, lte } from '@kodadot1/if-that'
+import { nftList, SomeNFT } from './data'
+```
+
+Now apply the rules
+
+```ts
+const newName = 'Hello Viki @ Blockhaton'
+const address = 'Fksmad33PFxhrQXNYPPJozgWrv82zuFLvXK7Rh8m1xQhe98'
+const ifThat: IfThat<SomeNFT> = [eq(nft.currentOwner, address), 'name', newName]
+const res = build([ifThat], nft)
+expect(res.name).eq(newName)
+expect(nft.name).not.eq(res.name)
+```
+
+---
+
+# Let's do something
+
+### Example Task (2)
+
+Using **if-that** I want to change the metadata if the current owner does not equal to Viki's address and royalty is set to more than 26.
+
+- Metadata should be changed to: `ipfs://ipfs/bafkreie6aheicniw2ene6iofxj7e6cettjioxojdstwabdqkxozjk2tyru`
+---
+
+# Example Task (how I would write it)
+
+Using **if-that** I want to change the metadata if the current owner does not equal to Viki's address and royalty is set to more than 26.
+- Metadata should be changed to: `ipfs://ipfs/bafkreie6aheicniw2ene6iofxj7e6cettjioxojdstwabdqkxozjk2tyru`
+
+```ts
+import { IfThat, neq, build, gt, lte } from '@kodadot1/if-that'
+import { nftList, SomeNFT } from './data'
+```
+
+Now apply the rules
+
+```ts
+const newMeta = 'ipfs://ipfs/bafkreie6aheicniw2ene6iofxj7e6cettjioxojdstwabdqkxozjk2tyru'
+const address = 'Fksmad33PFxhrQXNYPPJozgWrv82zuFLvXK7Rh8m1xQhe98'
+const ifThat: IfThat<SomeNFT> = [[neq(nft.currentOwner, address), lte(nft.royalty, 26)], 'metadata', newMeta]
+const res = build([ifThat], nft)
+expect(res.metadata).eq(newMeta)
 ```
 
 ---
