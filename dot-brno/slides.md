@@ -20,7 +20,7 @@ drawings:
   persist: false
 ---
 
-# The unified NFT developer experience
+# KodaDot: The unified NFT developer experience
 
 Making developers' lives easier
 
@@ -71,7 +71,7 @@ Making developers' lives easier
 
 - Bounty based - bringing dev talent to the ecosystem
 
-- 330 + forks, 220+ stars, 80+ contributors
+- **330 + forks, 220+ stars, 80+ contributors**
 
 </div>
 <div>
@@ -176,7 +176,7 @@ Making developers' lives easier
 
 - Best thing? - no middleware server is needed
 
-- 15+ calls supported so far
+- **15+ calls supported**
 
 </div>
   <div>
@@ -303,6 +303,8 @@ Making developers' lives easier
 </div>
   <div>
   <h2>after</h2>
+
+  <img border="rounded" src="/paraspell.png">
     
   ```ts
   import { xTokens as paraspell } from '@paraspell/sdk'
@@ -313,9 +315,9 @@ Making developers' lives easier
   const call = paraspell
     .transferRelayToPara(api, paraId, amount, address)
   
+
   ```
 
-  <img border="rounded" src="/paraspell.png">
   </div>
 </div>
 
@@ -330,7 +332,7 @@ Making developers' lives easier
 
 - KodaDot is an excellent example of how to build on Substrate
 
-- To iterate fast, we have sub-scaffold
+- To iterate fast, we have **sub-scaffold**
 
 - Open-source, hackable frontend scaffolding
 
@@ -355,7 +357,7 @@ Making developers' lives easier
 <div>
 
 - being your single asset interface for managing NFTs on Polkadot & Kusama
-  - abstract technology from a user 
+  - **abstract technology from a user**
   - which parachain am I at, and does it matter?
     - do necessary steps on behalf of the user in the background (token swaps, XCM transfers)
   - simplification of token transfers
@@ -380,7 +382,7 @@ Making developers' lives easier
 
 - ✅ high-speed multi-chain search (wink SubSquid)
 
-- abstracting NFTs from user experience
+- 🏗 abstracting NFTs from user experience
 
 - generative art minting
 
@@ -440,7 +442,7 @@ Making developers' lives easier
 
 - we've already had 20+ visitors over the summer of '22
 
-- opening ceremony mid of December
+- **opening ceremony mid of December**
 
 - go to https://subwork.xyz for more
 
