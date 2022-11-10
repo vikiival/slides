@@ -470,6 +470,7 @@ Making developers' lives easier
   - https://twitter.com/helloitsdamsky
   - https://twitter.com/De_luneClaire
   - https://twitter.com/Just_Luuuu
+  - https://twitter.com/OndraPulc
 
 </div>
   <div>
