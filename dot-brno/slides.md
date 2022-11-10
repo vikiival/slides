@@ -480,5 +480,3 @@ Making developers' lives easier
   </div>
 </div>
 
-
----
