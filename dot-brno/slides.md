@@ -477,8 +477,6 @@ and making the ecosystem awesome
   - https://twitter.com/OndraPulc
 
 </div>
-  <div>
-    <img border="rounded" width="300" src="/dot-brno.jpeg">
-  </div>
+    <img border="rounded" width="300" src="/waifu.png">
 </div>
 
