@@ -20,9 +20,10 @@ drawings:
   persist: false
 ---
 
-# KodaDot: The unified NFT developer experience
+# KodaVerse: what can you hack with @KodaDot
 
-Making developers' lives easier
+
+and making ecosystem awesome
 
 ---
 
@@ -45,7 +46,8 @@ Making developers' lives easier
 </div>
 
 <div>
-<img border="rounded" style="border-radius: 50%;" width="300" src="/vikiival.jpeg">
+<!-- <img border="rounded" style="border-radius: 50%;" width="300" src="/viki-squared.jpeg"> -->
+<img border="rounded" width="300" src="/viki-squared.jpeg">
   
 </div>
 
@@ -181,7 +183,7 @@ Making developers' lives easier
 </div>
   <div>
   <!-- <Suspense>
-    <TokenDetail id="1825819407-1" />
+    <TokenDetail id="1110111-41" />
   </Suspense> -->
     <img border="rounded" width="300" src="/token-detail.png">
   </div>
@@ -382,9 +384,9 @@ Making developers' lives easier
 
 - ✅ high-speed multi-chain search (wink SubSquid)
 
-- 🏗 abstracting NFTs from user experience
+- ✅ generative art minting
 
-- generative art minting
+- 🏗 abstracting NFTs from user experience
 
 - zkPrompts marketplace
 
@@ -426,7 +428,7 @@ Making developers' lives easier
 
 ---
 
-# SubWork -- your best Web3 retreat in the mountains
+# SubWork -- christmas party in the mountains
 
 <div grid="~ cols-2 gap-2" m="t-2">
 <div>
@@ -438,11 +440,9 @@ Making developers' lives easier
 
 - rated among top10 beautiful places in Europe
 
-- up & running
-
 - we've already had 20+ visitors over the summer of '22
 
-- **opening ceremony mid of December**
+- **Christmas party 14.02.2022**
 
 - go to https://subwork.xyz for more
 
@@ -450,7 +450,7 @@ Making developers' lives easier
 
 </div>
   <div>
-    <img border="rounded" src="/subwork.jpeg">
+    <img border="rounded" src="/subwork-party.webp">
   </div>
 </div>
 
