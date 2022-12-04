@@ -336,13 +336,13 @@ and making ecosystem awesome
 
 - To iterate fast, we have **sub-scaffold**
 
-- Open-source, hackable frontend scaffolding
+- Open-source, hackable frontend to build own project
 
 - Based on Vue3, Nuxt3, NaiveUI
 
-- ParaSpell UI will be built on top of it
+- With batteries included - Login, KodaDot API, Subsquid
 
-- Ink! support coming soon
+-  **Swanky Ink!** support with Astar
 
 </div>
   <div>
@@ -382,9 +382,9 @@ and making ecosystem awesome
 
 <h3>and you can do too with us</h3>
 
-- ✅ high-speed multi-chain search (wink SubSquid)
-
 - ✅ generative art minting
+
+- 🏗 ultra-speed multi-chain search
 
 - 🏗 abstracting NFTs from user experience
 
@@ -404,19 +404,21 @@ and making ecosystem awesome
 ---
 
 
-# Your contribution matters
+# Your hacks matter
 
 <div grid="~ cols-2 gap-2" m="t-2">
 <div>
 
  
-<h3>We are looking forward to more collaborators on</h3>
+<h3>What can you hack on the hackhaton?</h3>
 
-- music NFTs
+- cross-chain search
 
-- GLSL/shaders
+- mass minting for artists
 
-- on-chain art grifters
+- analytics for NFTs
+
+- token curated registry
 
 - helping to shape our API/SDK for games
 
