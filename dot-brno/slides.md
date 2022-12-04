@@ -23,7 +23,7 @@ drawings:
 # KodaVerse: what can you hack with @KodaDot
 
 
-and making ecosystem awesome
+and making the ecosystem awesome
 
 ---
 
@@ -410,7 +410,7 @@ and making ecosystem awesome
 <div>
 
  
-<h3>What can you hack on the hackhaton?</h3>
+<h3>What can you hack on the hackathon?</h3>
 
 - cross-chain search
 
