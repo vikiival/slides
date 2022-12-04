@@ -20,9 +20,10 @@ drawings:
   persist: false
 ---
 
-# KodaDot: The unified NFT developer experience
+# KodaVerse: what can you hack with @KodaDot
 
-Making developers' lives easier
+
+and making the ecosystem awesome
 
 ---
 
@@ -45,7 +46,8 @@ Making developers' lives easier
 </div>
 
 <div>
-<img border="rounded" style="border-radius: 50%;" width="300" src="/vikiival.jpeg">
+<!-- <img border="rounded" style="border-radius: 50%;" width="300" src="/viki-squared.jpeg"> -->
+<img border="rounded" width="300" src="/viki-squared.jpeg">
   
 </div>
 
@@ -181,7 +183,7 @@ Making developers' lives easier
 </div>
   <div>
   <!-- <Suspense>
-    <TokenDetail id="1825819407-1" />
+    <TokenDetail id="1110111-41" />
   </Suspense> -->
     <img border="rounded" width="300" src="/token-detail.png">
   </div>
@@ -334,13 +336,13 @@ Making developers' lives easier
 
 - To iterate fast, we have **sub-scaffold**
 
-- Open-source, hackable frontend scaffolding
+- Open-source, hackable frontend to build own project
 
 - Based on Vue3, Nuxt3, NaiveUI
 
-- ParaSpell UI will be built on top of it
+- With batteries included - Login, KodaDot API, Subsquid
 
-- Ink! support coming soon
+-  **Swanky Ink!** support with Astar
 
 </div>
   <div>
@@ -380,11 +382,11 @@ Making developers' lives easier
 
 <h3>and you can do too with us</h3>
 
-- ✅ high-speed multi-chain search (wink SubSquid)
+- ✅ generative art minting
+
+- 🏗 ultra-speed multi-chain search
 
 - 🏗 abstracting NFTs from user experience
-
-- generative art minting
 
 - zkPrompts marketplace
 
@@ -402,19 +404,21 @@ Making developers' lives easier
 ---
 
 
-# Your contribution matters
+# Your hacks matter
 
 <div grid="~ cols-2 gap-2" m="t-2">
 <div>
 
  
-<h3>We are looking forward to more collaborators on</h3>
+<h3>What can you hack on the hackathon?</h3>
 
-- music NFTs
+- cross-chain search
 
-- GLSL/shaders
+- mass minting for artists
 
-- on-chain art grifters
+- analytics for NFTs
+
+- token curated registry
 
 - helping to shape our API/SDK for games
 
@@ -426,7 +430,7 @@ Making developers' lives easier
 
 ---
 
-# SubWork -- your best Web3 retreat in the mountains
+# SubWork -- christmas party in the mountains
 
 <div grid="~ cols-2 gap-2" m="t-2">
 <div>
@@ -438,11 +442,9 @@ Making developers' lives easier
 
 - rated among top10 beautiful places in Europe
 
-- up & running
-
 - we've already had 20+ visitors over the summer of '22
 
-- **opening ceremony mid of December**
+- **Christmas party 14.02.2022**
 
 - go to https://subwork.xyz for more
 
@@ -450,7 +452,7 @@ Making developers' lives easier
 
 </div>
   <div>
-    <img border="rounded" src="/subwork.jpeg">
+    <img border="rounded" src="/subwork-party.webp">
   </div>
 </div>
 
