@@ -74,6 +74,12 @@ src: ./slides/so.md
 ---
 
 ---
+layout: center
+class: text-center
+src: ./slides/coupon.md
+---
+
+---
 src: ./slides/literature.md
 ---
 
